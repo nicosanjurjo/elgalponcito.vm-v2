@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elgalponcito.vm | Realizar pedido</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href={% static "css/cliente_styles.css" %} />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="{% static "js/cliente.js" %}"></script>
+</head>
+<body>
+    <header class="text-center my-3">
+        <img id="logo" src={% static 'img/logo.png' %} class="img-fluid" alt="Logo de la Pizzería">
+        <h5><p>Pizzas artesanales estilo napolitano</p>
+            <p>De jueves a domingo. De 19 a 00 hs</p>
+            <p>Brasil 557, Villa Mercedes, San Luis</p>
+            <p>2657-584580</p></h5>
+    </header>
+    <div id="scrollCategorias"><a href="#scrollto" class="btn btn-primary">HACE TU PEDIDO ACÁ</a></div>
+    <hr style="color: #eee2a8">
+    <!-- Carrusel de imágenes -->
+    <div class="container mb-4">
+        <div class="row justify-content-center">
+            <div class="col-md-10"> <!-- Cambia el tamaño según tu necesidad -->
+                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <h5>¿Que ofrecemos?</h5>
+                            <h6>Pizza artesanal estilo napolitano</h6>
+                            <img src={% static 'img/prueba1.jpg' %} class="d-block w-100" alt="Imagen 1">
+                        </div>
+                        <div class="carousel-item">
+                            <h6>Bajo porcentaje de levadura <br>
+                                Alta hidratación <br>
+                                Leudado prolongado en frio <br>
+                                Liviana, suave y fácil de digerir</h6>
+                            <img src={% static 'img/prueba2.jpg' %} class="d-block w-100" alt="Imagen 2">
+                        </div>
+                        <div class="carousel-item">
+                            <h6>Cocción en horno a leña</h6>
+                            <img src={% static 'img/prueba3.jpg' %} class="d-block w-100" alt="Imagen 3">
+                        </div>
+                        <div class="carousel-item">
+                            <h6>También, elaboramos <br>
+                                sandwiches con pan artesanal</h6>
+                            <img src={% static 'img/prueba4.jpg' %} class="d-block w-100" alt="Imagen 3">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h4 id="scrollto" style="text-align: center; padding-top: 15px">Agrega los productos a tu pedido:</h4><br>
+    <div id="lista-categorias" class="container">
+        <div class="row">
+            {% for categoria in categorias %}
+                {% if categoria.disponible %}
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="categoria">
+                            <h4 class="nombre-cat text-center">{{ categoria.nombre }}s</h4>
+                            <div class="productos">
+                                {% for producto in productos %}
+                                    {% if producto.categoria.id == categoria.id and producto.disponible %}
+                                        <div class="card m-2">
+                                            <div class="card-body">
+                                                <div class="producto-info">
+                                                <h5 class="card-title">{{ producto.nombre }}</h5>
+                                                <p class="card-text">{{ producto.descripcion }}</p>
+                                                </div>
+                                                <div class="producto-precio-boton">
+                                                <h5 class="card-text">${{ producto.precio }}</h5>
+                                                <button class="btn" onclick="agregarProducto('{{ producto.id }}', '{{ producto.nombre }}', '{{ producto.precio }}', '{{ producto.categoria }}')">Agregar al pedido</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="estado-carrito">
+    <a class="btn btn-primary" style="background-color: green" href="form_cliente/">Ir a pagar</a>
+    <a class="btn btn-danger" style="background-color: red" onclick='vaciarCarrito()'>Vaciar carrito</a>
+    <span id="total-carrito"></span>
+    </div>
+    <footer>
+        <p>Desarrollado y diseñado por &copy;2024 DesarrolloCriollo.</p>
+        <p>Instagram: desarrollocriollo</p>
+    </footer>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</html>

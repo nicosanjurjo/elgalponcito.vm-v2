@@ -1,0 +1,94 @@
+body {
+    background: rgb(250, 55, 55);
+}
+
+/* Ajusta la imagen del logo */
+header img {
+    width: 70%;
+    height: auto; /* Mantiene la proporción de la imagen */
+    max-height: 350px; /* Ajusta esta altura según tus necesidades */
+    object-fit: fill; /* Corta la imagen si es necesario para que se ajuste */
+}
+
+/* Asegúrate de que el texto debajo de la imagen no quede demasiado cerca */
+header h3 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Ajusta las tarjetas de productos */
+#productos {
+    padding-left: 8px;
+    padding-right: 8px;
+    display: flex;
+    flex-wrap: wrap; /* Permite que las tarjetas se ajusten en múltiples filas */
+    gap: 1rem; /* Espacio entre tarjetas */
+    justify-content: center; /* Centra las tarjetas en la pantalla */
+}
+
+/* Cuerpo de la tarjeta usando flexbox */
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Espacio entre la descripción y el botón/precio */
+    height: 100%; /* Asegura que el cuerpo de la tarjeta ocupe todo el espacio disponible */
+}
+
+.card h6 {
+    text-align: right;
+}
+
+.form-check-inline{
+    margin: 10px;
+}
+
+.btn {
+    margin: 8px;
+}
+
+footer {
+    background-color: #0080ff;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #6c757d;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Ajusta las tarjetas para pantallas más pequeñas (por debajo de 576px) */
+@media (max-width: 576px) {
+    .card {
+        flex: 1 1 calc(50% - 1rem); /* Dos tarjetas por fila en pantallas pequeñas */
+    }
+    .opciones{
+        display: flex;
+        inline-size: auto;
+    }
+}
+
+/* Ajusta las tarjetas para pantallas muy pequeñas (por debajo de 400px) */
+@media (max-width: 400px) {
+    .card {
+        flex: 1 1 100%; /* Una tarjeta por fila en pantallas muy pequeñas */
+    }
+    .opciones{
+        display: flex;
+        inline-size: auto;
+    }
+}

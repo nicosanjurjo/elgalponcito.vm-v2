@@ -1,0 +1,27 @@
+.on-off {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+img {
+    width: 150px;
+    height: 150px;
+}
+
+.stock {
+    display: flex;
+    flex-direction: column;
+}
+
+.stock span {
+    text-align: center;
+    margin-bottom: 5px;
+    background: blanchedalmond;
+}
+
+.stock button {
+    margin: 5px;
+}
