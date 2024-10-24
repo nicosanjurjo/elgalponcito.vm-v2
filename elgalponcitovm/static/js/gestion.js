@@ -76,7 +76,16 @@ $(document).ready(function() {
         });
       }
 
-        // Manejar el botón "Ver/Editar"
+  function formatDate(dateString) {
+    let date = new Date(dateString);
+      return date.toLocaleDateString('es-ES', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+        });
+    }
   $('.ver-editar').click(function() {
     var pedidoId = $(this).data('id');
     $.ajax({
@@ -85,7 +94,7 @@ $(document).ready(function() {
       data: { 'id': pedidoId },
       success: function(response) {
         $('#pedido-id').text(response.id);
-        $('#pedido-ingreso').text(response.ingreso);
+        $('#pedido-ingreso').text(formatDate(response.ingreso));
         $('#pedido-nombre').text(response.nombre);
         $('#pedido-telefono').text(response.telefono);
         $('#pedido-cantidad').text(response.cantidad);

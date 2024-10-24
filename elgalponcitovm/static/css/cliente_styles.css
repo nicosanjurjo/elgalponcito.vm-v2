@@ -1,61 +1,189 @@
 body {
-    background: rgb(250, 55, 55);
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #000; /* Fondo negro */
+    color: #ffffff; /* Texto claro para contrastar con el fondo */
+}
+
+#logo {
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.confirmacion-agregado {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    font-size: 16px;
+    z-index: 1000;
+    animation: fadeInOut 2s ease forwards;
+}
+
+/* Animación de entrada y salida */
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(20px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(20px); }
 }
 
 /* Ajusta la imagen del logo */
 header img {
+    text-shadow: 0 4px 8px rgba(255, 132, 56, 0.1);
     width: 70%;
-    height: auto; /* Mantiene la proporción de la imagen */
-    max-height: 350px; /* Ajusta esta altura según tus necesidades */
-    object-fit: fill; /* Corta la imagen si es necesario para que se ajuste */
+    height: auto; 
+    max-height: 350px; 
+    object-fit: fill; 
 }
 
-/* Asegúrate de que el texto debajo de la imagen no quede demasiado cerca */
 header h3 {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
 
-/* Ajusta las tarjetas de productos */
-#productos {
-    padding-left: 8px;
-    padding-right: 8px;
-    display: flex;
-    flex-wrap: wrap; /* Permite que las tarjetas se ajusten en múltiples filas */
-    gap: 1rem; /* Espacio entre tarjetas */
-    justify-content: center; /* Centra las tarjetas en la pantalla */
+#scrollCategorias {
+    display: block;
+    margin: 10px auto;
+    max-width: fit-content;
 }
 
-/* Cuerpo de la tarjeta usando flexbox */
-.card-body {
+.carousel-inner p, h6 {
+    text-align: left;
+    margin-bottom: 30px;
+    margin-left: 12px;
+}
+
+#scrollto {
+    margin-top: 45px;
+}
+
+/* Ajusta la disposición de las categorías y productos */
+#lista-categorias {
+    background-color: #eee2a8; /* Color claro para el contenedor principal */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para darle un efecto de elevación */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+}
+
+.categoria {
+    background-color: #94947a; /* Fondo de las columnas de categorías */
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.productos {
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Espacio entre la descripción y el botón/precio */
-    height: 100%; /* Asegura que el cuerpo de la tarjeta ocupe todo el espacio disponible */
+    justify-content: space-between;
 }
 
-.card h6 {
-    text-align: right;
+.card {
+    background-color: #cc8533;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    color: white;
 }
 
-.form-check-inline{
-    margin: 10px;
+.card-body {
+    display: flex;
+    flex-direction: column; /* Mantener la dirección de la tarjeta como columna */
+    height: 100%; /* Asegurar que el cuerpo de la tarjeta ocupe toda la altura */
 }
 
-.btn {
-    margin: 8px;
+.producto-info {
+    flex-grow: 1; /* Permite que este div tome todo el espacio disponible */
+}
+
+.producto-precio-boton {
+    display: flex; /* Usar flex para el precio y botón */
+    flex-direction: column;
+    justify-content: space-between; /* Espacio entre precio y botón */
+    align-items: start; /* Alinea el precio y el botón verticalmente */
+    margin-top: 1rem; /* Espacio entre la descripción y el precio/botón */
+}
+
+.btn{
+    color: white;
+    background-color: #94947a; /* Verde vibrante */
+    border-color: #eee2a8;
+}
+
+.btn:hover {
+    background-color: #28a745; /* Un verde más oscuro para el hover */
+}
+
+.btn-danger {
+    background-color: rgb(255, 0, 0);
+}
+
+.btn-danger:hover {
+    background-color: rgb(207, 0, 0);
+}
+
+#estado-carrito {
+    position: sticky;  /* Mantiene el div fijo en la parte inferior */
+    bottom: 0;  /* El div se "pegará" al fondo cuando haya espacio */
+    left: 0;
+    right: 0;
+    z-index: 100;  /* Asegura que esté sobre otros elementos */
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);  /* Fondo oscuro semitransparente */
+    padding: 10px;
+    color: white;
+    display: none;  /* Aparece solo cuando hay productos en el carrito */
+    margin-top: 20px;
+}
+
+#total-carrito {
+    font-size: 18px;
+    margin-left: 5px;
+}
+
+#estado-carrito .btn {
+    margin: 0 5px; /* Espaciado entre botones */
+}
+
+#estado-carrito, span {
+    font-size: 22px;
+}
+
+.vercarrito {
+    background-color: #08a900;
+    border-color: #01750d;
+}
+
+.selectedz {
+    background-color: #01750d;
+}
+
+.confirmado {
+    background-color: #08a900;
+}
+
+.confirmado:hover {
+    background-color: #01750d
 }
 
 footer {
-    background-color: #0080ff;
+    background-color: #333; /* Un tono oscuro para el footer */
+    color: #eee2a8;
     padding: 20px;
     text-align: center;
     font-size: 14px;
-    color: #6c757d;
     position: relative;
     bottom: 0;
     width: 100%;
     box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    margin-top: 15px; /* Asegura que el footer no se superponga con el carrito */
 }
 
 footer p {
@@ -71,24 +199,42 @@ footer a:hover {
     text-decoration: underline;
 }
 
-/* Ajusta las tarjetas para pantallas más pequeñas (por debajo de 576px) */
-@media (max-width: 576px) {
-    .card {
-        flex: 1 1 calc(50% - 1rem); /* Dos tarjetas por fila en pantallas pequeñas */
+/* Ajustes para pantallas más grandes */
+@media (min-width: 992px) {
+    #carouselExample {
+        width: 500px;
+        height: 800px;
+        margin: 10px auto;
     }
-    .opciones{
-        display: flex;
-        inline-size: auto;
-    }
+    
 }
 
-/* Ajusta las tarjetas para pantallas muy pequeñas (por debajo de 400px) */
-@media (max-width: 400px) {
-    .card {
-        flex: 1 1 100%; /* Una tarjeta por fila en pantallas muy pequeñas */
+/* Estilos responsivos para pantallas más pequeñas */
+@media (max-width: 576px) {
+
+
+    .col-lg-4, .col-md-6 {
+        flex: 1 1 100%; /* Las columnas ocupan el 100% del ancho */
     }
-    .opciones{
+
+    .productos {
         display: flex;
-        inline-size: auto;
+        flex-direction: column;
     }
+
+    .card {
+        margin-bottom: 20px; /* Aumentamos el espacio entre las tarjetas */
+    }
+
+    /* 
+    .productos {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        flex: 1 1 calc(50% - 1rem);
+        margin: 0.5rem;
+    }  */
 }

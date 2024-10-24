@@ -15,9 +15,10 @@ $(document).ready(function() {
         productos.forEach(function(producto, index) {
             totalAmount += parseInt(producto.precio);
             let fila = `<tr>
+                            <td>${producto.categoria}</td>
                             <td>${producto.nombre}</td>
                             <td>${producto.precio}</td>
-                            <td><button class="btn btn-danger" onclick="eliminarProducto(${index})">Eliminar del pedido</button></td>
+                            <td><button class="btn btn-danger" onclick="eliminarProducto(${index})">Eliminar</button></td>
                         </tr>`;
             tablaProductos.append(fila);
         });
@@ -74,9 +75,9 @@ $(document).ready(function() {
     $('.seleccionar-zona').click(function() {
         const zonaPrecioSeleccionado = parseInt($(this).data('zona-costo'));
         zonaSeleccionada = $(this).data('zona-id'); // Guardar la zona seleccionada
-        $('.seleccionar-zona').removeClass('btn-success').addClass('btn-primary');
+        $('.seleccionar-zona').removeClass('btn-success selectedz').addClass('btn-primary');
         $('.seleccionar-zona').text('Seleccionar')
-        $(this).removeClass('btn-primary').addClass('btn-success');
+        $(this).removeClass('btn-primary').addClass('btn-success selectedz');
         $(this).text('Zona seleccionada');
         zonaPrecio = zonaPrecioSeleccionado; // Actualizar el precio de la zona
         actualizarTotal(); // Actualizar el total
@@ -150,9 +151,23 @@ $(document).ready(function() {
             data: JSON.stringify(datosPedido),
             contentType: 'application/json', // Especifica el tipo de contenido como JSON
             success: function(response) {
-                alert(`Pedido realizado con éxito\n\nDetalles del pedido:\n${detallesSimplificados}\n\nMonto total: $${totalAmount + zonaPrecio}\nSI ABONAS POR MP RECORDA ENVIAR EL COMPROBANTE AL 2657-584580`);
-                localStorage.clear();
-                window.location.href = '/cliente'; // Limpiar el localStorage
+                // Rellena los detalles del pedido en el modal
+                const detalles = `<br>
+                <strong>Detalles del pedido:</strong><br>${detallesSimplificados}<br><br>
+                <strong>Monto total:</strong><br>$${totalAmount + zonaPrecio}<br><br>
+                SI ABONAS POR <strong>MP/TRANSFERENCIA</strong> RECORDA ENVIAR EL <strong>COMPROBANTE AL 2657-584580</strong>`;
+    
+                // Usa html() en vez de text() para poder interpretar el HTML
+                $('#modal-detalles').html(detalles); 
+
+                // Muestra el modal
+                $('#successModal').modal('show');
+
+                // Limpia el localStorage y redirige después de cerrar el modal
+                $('#closeModalBtn').click(function() {
+                    localStorage.clear();
+                    window.location.href = '/';
+                });
             },
             error: function(error) {
                 alert('Error al realizar el pedido, por favor intente de nuevo.');
@@ -160,10 +175,15 @@ $(document).ready(function() {
         });
     });
     
+    $('.volver').click(function(event) {
+        window.location.href = '/cliente';
+
+    })
 
     $('.cancelar').click(function(event) {
         localStorage.clear()
         alert('Pedido cancelado');
+        window.location.href = '/cliente';
 
     })
 

@@ -1,3 +1,14 @@
+html, body {
+  height: 100%; /* Ocupar el 100% de la altura de la ventana */
+  margin: 0; /* Eliminar márgenes por defecto */
+}
+
+.offcanvas-title img {
+  width: 150px; 
+  height: 150px;
+
+}
+
 .navbar {
   background-color: #fff;
   height: 50px;
@@ -35,27 +46,34 @@
   visibility: visible;
 }
 
+.top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+
 body {
-  position: relative;
+  display: flex; /* Usar flexbox para el layout */
+  flex-direction: column; /* Alinear los elementos en columna */
   background-color: rgba(78, 11, 11, 0.6);
   margin: 5px;
-  min-height: 100vh;
 }
 
 footer {
-  padding-bottom: 14px;
-  position: absolute;
-  bottom: 0;
+  margin-top: 10px;
+  padding: 10px;
   width: 100%;
-  background-color: rgb(255, 111, 111);
+  border-radius: 5px;
+  background-color: rgb(255, 240, 240);
   text-align: center;
-  
+
 }
 
 #contenedor {
-  margin-top: 20px;
-  margin-left: 10px;
-  margin-right: 10px;
+  flex: 1; /* Permitir que el contenedor principal crezca y empuje el footer hacia abajo */
+  margin: 20px 10px; /* Ajustar márgenes */
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
@@ -117,5 +135,14 @@ footer {
 
   .on-off button {
     margin-bottom: 10px;
+  }
+
+  #contenedor {
+    flex: 1; /* Permitir que el contenedor principal crezca y empuje el footer hacia abajo */
+    margin: 5px; /* Ajustar márgenes */
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   }
 }
